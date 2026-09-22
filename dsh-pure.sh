@@ -1,29 +1,5 @@
 #!/bin/bash
 # 纯净模式启动 dsh web —— 只加载出厂随附插件。
-#
-# 为什么需要它：官方做破坏性更新后，web profile 里任何一个第三方 bundle
-# （dshmarket / dsh-cost-meter / dsh-better-sidebar / dsh-geo-workflow）在启动期
-# 抛错，`dsh web` 整棵树 fail-loud 退出（exit 1），18080 没人监听 → GUI 没了；
-# 而此时"用市场卸载坏插件"这条路也是死的，因为市场自己就是被炸掉的组合里的插件。
-#
-# 做法：另一个 profile（默认名 pure），bundle 列表只有出厂随附的两个：
-#   @deepseek-ai/dsh-base + @deepseek-ai/dsh-web-app
-# 它和 web profile 共用同一个 $DSH_HOME，所以会话历史、settings.yaml、
-# .credentials.yaml、agent preset 全都在 —— 起来就能让 agent 去修插件。
-#
-# 不改 deepseek-harness 里的任何文件，官方升级不会覆盖它。
-#
-# 仓库：https://github.com/zzk203/dsh-pure（同目录的 README.md 是完整使用说明）
-#
-# 用法（三者只差"首选端口"和"要不要自动开浏览器"）：
-#   ./dsh-pure.sh                     # 首选 18080；被占则 18081/18082…；自动打开浏览器
-#   ./dsh-pure.sh --no-open           # 同上端口，但不开浏览器：从 stdout 复制带 token 的 URL
-#   DSH_PURE_PORT=19000 ./dsh-pure.sh # 首选 19000；被占则 19001/19002…
-#   DSH_PURE_PROFILE=rescue ./dsh-pure.sh   # 换一个纯净 profile 名
-#
-# 其它可调环境变量：
-#   DSH_BIN  /usr/local/bin/dsh    DSH_NODE  PATH 里的 node
-#   DSH_PURE_CWD  /home/zzk/geo    启动时的工作目录（=会话工作区起点）
 set -u
 
 DSH_BIN=${DSH_BIN:-/usr/local/bin/dsh}
