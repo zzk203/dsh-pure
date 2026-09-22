@@ -13,7 +13,7 @@
 #
 # 不改 deepseek-harness 里的任何文件，官方升级不会覆盖它。
 #
-# 仓库：https://github.com/zzk203/dsh-pure（同目录的 dsh-纯净模式.md 是完整使用说明）
+# 仓库：https://github.com/zzk203/dsh-pure（同目录的 README.md 是完整使用说明）
 #
 # 用法（三者只差"首选端口"和"要不要自动开浏览器"）：
 #   ./dsh-pure.sh                     # 首选 18080；被占则 18081/18082…；自动打开浏览器
